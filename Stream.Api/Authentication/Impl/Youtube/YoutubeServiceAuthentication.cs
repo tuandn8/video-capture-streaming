@@ -22,21 +22,21 @@ namespace Stream.Api.Authentication.Impl.Youtube
         private UserCredential Credential
         { get; set; }
         
-        public bool Authenticate(String configFilePath)
+        public bool Authenticate(String ConfigFilePath)
         {
-            return DoAuthen(configFilePath).Result;
+            return DoAuthen(ConfigFilePath).Result;
         }
 
-        private async Task<bool> DoAuthen(string configFilePath)
+        private async Task<bool> DoAuthen(string ConfigFilePath)
         {
-            using (var stream = new FileStream(configFilePath, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(ConfigFilePath, FileMode.Open, FileAccess.Read))
             {
                 this.Credential = await GoogleWebAuthorizationBroker.AuthorizeAsync(
-                    GoogleClientSecrets.Load(stream).Secrets, 
-                    new[] { YouTubeService.Scope.Youtube }, 
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    new[] { YouTubeService.Scope.Youtube },
                     "tuan.hust.cs", 
                     CancellationToken.None,
-                    new FileDataStore(this.GetType().ToString()));
+                    new FileDataStore(GetType().ToString())).ConfigureAwait(false);
             }
 
             if (Credential.Token.IsExpired(Credential.Flow.Clock))

@@ -12,9 +12,9 @@ namespace Captura.Audio
         {
             get
             {
-                var enumerator = new MMDeviceEnumerator();
+                using var enumerator = new MMDeviceEnumerator();
                 var devices = enumerator.EnumerateAudioEndPoints(DataFlow.Capture, DeviceState.Active);
-                //enumerator.Dispose();
+
                 foreach (var device in devices)
                 {
                     yield return new NAudioItem(device, false);
@@ -28,9 +28,8 @@ namespace Captura.Audio
         {
             get
             {
-                var enumerator = new MMDeviceEnumerator();
+                using var enumerator = new MMDeviceEnumerator();
                 var devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-                enumerator.Dispose();
 
                 foreach (var device in devices)
                 {
@@ -45,29 +44,22 @@ namespace Captura.Audio
 
         public IAudioProvider GetAudioProvider(IAudioItem Microphone, IAudioItem Speaker)
         {
-            if (Microphone == null)
+            switch ((Microphone, Speaker))
             {
-                if (Speaker != null)
-                {
-                    NAudioItem speaker = (NAudioItem)Speaker;
+                case (null, NAudioItem speaker):
                     return new MixedAudioProvider(new WasapiLoopbackCaptureProvider(speaker.Device));
-                }
-            } else
-            {
-                NAudioItem mic = (NAudioItem)Microphone;
-                if (Speaker == null)
-                {
+
+                case (NAudioItem mic, null):
                     return new MixedAudioProvider(new WasapiCaptureProvider(mic.Device));
-                } else
-                {
-                    NAudioItem speaker = (NAudioItem)Speaker;
+
+                case (NAudioItem mic, NAudioItem speaker):
                     return new MixedAudioProvider(
                         new WasapiCaptureProvider(mic.Device),
                         new WasapiLoopbackCaptureProvider(speaker.Device));
-                }
-            }
 
-            return null;
+                default:
+                    return null;
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ namespace Captura
 
         public string PixelFormat
         {
-            get => Get("yuv420p");
+            get => Get("yuv444p");
             set
             {
                 if (PixelFormats.Contains(value))

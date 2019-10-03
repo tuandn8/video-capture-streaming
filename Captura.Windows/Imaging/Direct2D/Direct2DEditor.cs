@@ -52,16 +52,13 @@ namespace DesktopDuplication
 
         public IBitmapImage LoadBitmap(string FileName)
         {
-            var decoder = new BitmapDecoder(_editorSession.ImagingFactory, FileName, 0);
-            var bmpSource = decoder.GetFrame(0);
-            var convertedBmp = new FormatConverter(_editorSession.ImagingFactory);
+            using var decoder = new BitmapDecoder(_editorSession.ImagingFactory, FileName, 0);
+            using var bmpSource = decoder.GetFrame(0);
+            using var convertedBmp = new FormatConverter(_editorSession.ImagingFactory);
             convertedBmp.Initialize(bmpSource, PixelFormat.Format32bppPBGRA);
 
             var bmp = Bitmap.FromWicBitmap(_editorSession.RenderTarget, convertedBmp);
 
-            decoder.Dispose();
-            bmpSource.Dispose();
-            convertedBmp.Dispose();
             return new Direct2DImage(bmp);
         }
 
@@ -170,10 +167,8 @@ namespace DesktopDuplication
         {
             if (Font is Direct2DFont font)
             {
-                var layout = GetTextLayout(Text, font.TextFormat);
-                var result = new SizeF(layout.Metrics.Width, layout.Metrics.Height);
-                layout.Dispose();
-                return result;
+                using var layout = GetTextLayout(Text, font.TextFormat);
+                return new SizeF(layout.Metrics.Width, layout.Metrics.Height);
             }
 
             return SizeF.Empty;
@@ -183,7 +178,7 @@ namespace DesktopDuplication
         {
             if (Font is Direct2DFont font)
             {
-                var layout = GetTextLayout(Text, font.TextFormat);
+                using var layout = GetTextLayout(Text, font.TextFormat);
                 _editorSession.RenderTarget.DrawTextLayout(
                     new RawVector2(LayoutRectangle.X, LayoutRectangle.Y),
                     layout,

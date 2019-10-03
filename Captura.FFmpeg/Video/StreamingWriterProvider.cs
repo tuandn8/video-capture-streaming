@@ -15,6 +15,9 @@ namespace Captura.Models
         {
             yield return new TwitchVideoCodec();
             yield return new YouTubeLiveVideoCodec();
+            yield return new SteamLiveVideoCodec();
+            yield return new MixerLiveVideoCodec();
+            yield return new WowzaLiveVideoCodec();
             yield return new CustomStreamingVideoCodec();
         }
 

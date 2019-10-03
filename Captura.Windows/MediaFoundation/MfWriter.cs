@@ -118,7 +118,7 @@ namespace DesktopDuplication
                     _writer.AddStream(audioTypeOut, out _);
                 }
 
-                var audioTypeIn = GetMediaType(wf);
+                using var audioTypeIn = GetMediaType(wf);
                 audioTypeIn.Set(MediaTypeAttributeKeys.Subtype, AudioFormatGuids.Pcm);
                 _writer.SetInputMediaType(AudioStreamIndex, audioTypeIn, null);
             }
@@ -247,7 +247,7 @@ namespace DesktopDuplication
                 }
                 else
                 {
-                    var buffer = MediaFactory.CreateMemoryBuffer(_bufferSize);
+                    using var buffer = MediaFactory.CreateMemoryBuffer(_bufferSize);
                     var data = buffer.Lock(out _, out _);
 
                     Image.CopyTo(data);
@@ -256,7 +256,7 @@ namespace DesktopDuplication
 
                     buffer.Unlock();
 
-                    var sample = MediaFactory.CreateVideoSampleFromSurface(null);
+                    using var sample = MediaFactory.CreateVideoSampleFromSurface(null);
                     sample.AddBuffer(buffer);
 
                     Write(sample);
@@ -280,7 +280,7 @@ namespace DesktopDuplication
 
                 buffer.Unlock();
 
-                var sample = MediaFactory.CreateVideoSampleFromSurface(null);
+                using var sample = MediaFactory.CreateVideoSampleFromSurface(null);
                 sample.AddBuffer(buffer);
 
                 sample.SampleTime = _audioWritten * TenPower7 / _audioInBytesPerSecond;

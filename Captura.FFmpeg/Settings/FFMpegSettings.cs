@@ -50,6 +50,42 @@ namespace Captura
             set => Set(value);
         }
 
+        public string SteamLiveUrl
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
+        public string SteamLiveKey
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
+        public string MixerLiveKey
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
+        public string WowzaLiveUrl
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
+        public string WowzaApp
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
+        public string WowzaStream
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
         public ObservableCollection<FFmpegCodecSettings> CustomCodecs { get; } = new ObservableCollection<FFmpegCodecSettings>();
 
         public string CustomStreamingUrl

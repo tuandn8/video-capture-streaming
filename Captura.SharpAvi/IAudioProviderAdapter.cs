@@ -34,8 +34,8 @@ namespace Captura.Models
                 if (extraSize <= 0)
                     return null;
 
-                var ms = new MemoryStream();
-                var writer = new BinaryWriter(ms);
+                using var ms = new MemoryStream();
+                using var writer = new BinaryWriter(ms);
                 _provider.WaveFormat.Serialize(writer);
 
                 var formatData = new byte[extraSize];

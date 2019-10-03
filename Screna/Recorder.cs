@@ -103,6 +103,10 @@ namespace Screna
                     {
                         return false;
                     }
+                    //catch (Exception)
+                    //{
+                    //    return false;
+                    //}
                 }
 
                 bool CanContinue()

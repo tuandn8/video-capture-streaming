@@ -39,5 +39,5 @@ namespace Stream.Api.Models
         }
 
         public void Dispose() { }
-    }
+    }   
 }

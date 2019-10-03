@@ -2,7 +2,7 @@
 
 namespace Captura.FFmpeg
 {
-    abstract class StreamingVideoCodec : FFmpegVideoCodec
+    public abstract class StreamingVideoCodec : FFmpegVideoCodec
     {
         protected StreamingVideoCodec(string Name, string Description) : base(Name, ".mp4", Description) { }
 

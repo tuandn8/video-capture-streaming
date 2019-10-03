@@ -1,6 +1,6 @@
 ﻿namespace Captura.FFmpeg
 {
-    class TwitchVideoCodec : StreamingVideoCodec
+    public class TwitchVideoCodec : StreamingVideoCodec
     {
         public TwitchVideoCodec() : base("Twitch", "Stream to Twitch") { }
 

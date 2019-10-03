@@ -35,18 +35,16 @@ namespace Captura.Models
 
         public void SetImage(IBitmapImage Bmp)
         {
-            var pngStream = new MemoryStream();
+            using var pngStream = new MemoryStream();
             Bmp.Save(pngStream, ImageFormats.Png);
             var pngClipboardData = new DataObject("PNG", pngStream);
 
-            var whiteS = new Bitmap(Bmp.Width, Bmp.Height, PixelFormat.Format24bppRgb);
+            using var whiteS = new Bitmap(Bmp.Width, Bmp.Height, PixelFormat.Format24bppRgb);
             Image drawingImg;
 
             if (Bmp is DrawingImage drawingImage)
                 drawingImg = drawingImage.Image;
             else drawingImg = Image.FromStream(pngStream);
-
-            pngStream.Dispose();
 
             using (var graphics = Graphics.FromImage(whiteS))
             {
@@ -56,7 +54,6 @@ namespace Captura.Models
 
             // Add fallback for applications that don't support PNG from clipboard (eg. Photoshop or Paint)
             pngClipboardData.SetData(DataFormats.Bitmap, whiteS);
-            whiteS.Dispose();
 
             Clipboard.Clear();
             Clipboard.SetDataObject(pngClipboardData, true);

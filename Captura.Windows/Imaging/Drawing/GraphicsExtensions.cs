@@ -223,13 +223,13 @@ namespace Captura.Models
 
         public static void DrawRoundedRectangle(this Graphics Graphics, Pen Pen, RectangleF Bounds, int CornerRadius)
         {
-            var path = RoundedRect(Bounds, CornerRadius);
+            using var path = RoundedRect(Bounds, CornerRadius);
             Graphics.DrawPath(Pen, path);
         }
 
         public static void FillRoundedRectangle(this Graphics Graphics, Brush Brush, RectangleF Bounds, int CornerRadius)
         {
-            var path = RoundedRect(Bounds, CornerRadius);
+            using var path = RoundedRect(Bounds, CornerRadius);
             Graphics.FillPath(Brush, path);
         }
 

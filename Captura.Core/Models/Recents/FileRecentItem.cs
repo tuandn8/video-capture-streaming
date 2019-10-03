@@ -86,7 +86,7 @@ namespace Captura.Models
 
             var imgSystem = ServiceProvider.Get<IImagingSystem>();
 
-            var img = imgSystem.LoadBitmap(FileName);
+            using var img = imgSystem.LoadBitmap(FileName);
             await img.UploadImage();
         }
 
@@ -105,7 +105,7 @@ namespace Captura.Models
 
                 var imgSystem = ServiceProvider.Get<IImagingSystem>();
 
-                var img = imgSystem.LoadBitmap(FileName);
+                using var img = imgSystem.LoadBitmap(FileName);
                 clipboard.SetImage(img);
             }
             catch (Exception e)

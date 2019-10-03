@@ -36,8 +36,15 @@ namespace Stream.Api.Models
             serviceLocator.VideoWritersViewModel.SelectedVideoWriter =
                 serviceLocator.VideoWritersViewModel.AvailableVideoWriters.FirstOrDefault(M => M is X264VideoCodec);
 
+            foreach (var availableSpeaker in serviceLocator.AudioSourceViewModel.AvailableSpeakers)
+            {
+                Console.WriteLine("Speaker name: " + availableSpeaker.Name);
+            }
+
+            Console.WriteLine("Speaker : " + serviceLocator.AudioSourceViewModel.AvailableSpeakers[1].Name);
+            serviceLocator.RecordingViewModel.Settings.Audio.RecordSpeaker = true;
             serviceLocator.AudioSourceViewModel.SelectedSpeaker =
-                serviceLocator.AudioSourceViewModel.AvailableSpeakers.FirstOrDefault();
+                serviceLocator.AudioSourceViewModel.AvailableSpeakers[1];
 
         }
 

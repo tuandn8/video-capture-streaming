@@ -2,8 +2,9 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
   <ItemGroup>
-    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.41.1.1699" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.36.1.1226" />
   </ItemGroup>
 
   <ItemGroup>

@@ -26,7 +26,7 @@ namespace Captura.Models
 
         public async Task<UploadResult> Upload(IBitmapImage Image, ImageFormats Format, Action<int> Progress)
         {
-            var w = new WebClient { Proxy = _proxySettings.GetWebProxy() };
+            using var w = new WebClient { Proxy = _proxySettings.GetWebProxy() };
             if (Progress != null)
             {
                 w.UploadProgressChanged += (S, E) => Progress(E.ProgressPercentage);
@@ -93,7 +93,7 @@ namespace Captura.Models
                 { "grant_type", "refresh_token" }
             };
 
-            var w = new WebClient { Proxy = _proxySettings.GetWebProxy() };
+            using var w = new WebClient { Proxy = _proxySettings.GetWebProxy() };
             var token = await UploadValuesAsync<ImgurRefreshTokenResponse>(w, "https://api.imgur.com/oauth2/token.json", args);
 
             if (string.IsNullOrEmpty(token?.AccessToken))

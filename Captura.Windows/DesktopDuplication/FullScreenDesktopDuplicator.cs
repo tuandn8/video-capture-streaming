@@ -19,12 +19,11 @@ namespace DesktopDuplication
             IPreviewWindow PreviewWindow,
             IPlatformServices PlatformServices)
         {
-            var factory = new Factory1();
+            using var factory = new Factory1();
             var outputs = factory
                 .Adapters1
                 .SelectMany(M => M.Outputs)
                 .ToArray();
-            factory.Dispose();
 
             var bounds = PlatformServices.DesktopRectangle;
 

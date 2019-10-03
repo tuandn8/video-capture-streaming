@@ -25,15 +25,14 @@ namespace Screna
             var r = backdrop.Rectangle;
 
             // Capture screenshot with white background
-            var whiteShot = CaptureInternal(r);
+            using var whiteShot = CaptureInternal(r);
             backdrop.ShowBlack();
 
             // Capture screenshot with black background
-            var blackShot = CaptureInternal(r);
+            using var blackShot = CaptureInternal(r);
             backdrop.Dispose();
 
             var transparentImage = GraphicsExtensions.DifferentiateAlpha(whiteShot, blackShot);
-            blackShot.Dispose();
 
             if (transparentImage == null)
                 return null;
@@ -41,9 +40,8 @@ namespace Screna
             // Include Cursor only if within window
             if (IncludeCursor && r.Contains(PlatformServices.CursorPosition))
             {
-                var g = Graphics.FromImage(transparentImage);
+                using var g = Graphics.FromImage(transparentImage);
                 MouseCursor.Draw(g, P => new Point(P.X - r.X, P.Y - r.Y));
-                g.Dispose();
             }
 
             return new DrawingImage(transparentImage.CropEmptyEdges());

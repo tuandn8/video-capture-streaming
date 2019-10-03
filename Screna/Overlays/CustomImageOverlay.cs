@@ -64,9 +64,7 @@ namespace Captura.Models
 
         IBitmapImage GetImage(IEditableFrame Editor)
         {
-            if (_bmp == null) 
-                _bmp = Editor.LoadBitmap(_settings.Source);
-            return _bmp;
+            return _bmp ??= Editor.LoadBitmap(_settings.Source);
         }
     }
 }

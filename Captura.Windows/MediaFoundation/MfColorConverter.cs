@@ -98,8 +98,8 @@ namespace Captura
             // I think the output data buffer is not [Out] marshalled.
             ((IMFTransform)Marshal.GetObjectForIUnknown(_colorConverter.NativePointer)).ProcessOutput(0, 1, buf, out _);
 
-            var sample = new Sample(buf[0].pSample);
-            var buffer = sample.GetBufferByIndex(0);
+            using var sample = new Sample(buf[0].pSample);
+            using var buffer = sample.GetBufferByIndex(0);
             var ptr = buffer.Lock(out _, out _);
 
             Marshal.Copy(ptr, Output, 0, Output.Length);

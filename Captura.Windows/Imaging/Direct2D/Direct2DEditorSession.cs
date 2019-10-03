@@ -30,28 +30,9 @@ namespace DesktopDuplication
         Factory _writeFactory;
         ImagingFactory _imagingFactory;
 
-        public Factory WriteFactory 
-        {
-            get
-            {
-                if (_writeFactory == null)
-                {
-                    _writeFactory = new Factory();
-                }
-                return _writeFactory;
-            }
-        } 
-        
+        public Factory WriteFactory => _writeFactory ??= new Factory();
 
-        public ImagingFactory ImagingFactory 
-        {
-            get
-            {
-                if (_imagingFactory == null)
-                    _imagingFactory = new ImagingFactory();
-                return _imagingFactory;
-            }
-        }
+        public ImagingFactory ImagingFactory => _imagingFactory ??= new ImagingFactory();
 
         public Lazy<MfColorConverter> ColorConverter { get; }
 

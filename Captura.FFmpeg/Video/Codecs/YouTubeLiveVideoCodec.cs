@@ -1,8 +1,8 @@
 ﻿namespace Captura.FFmpeg
 {
-    class YouTubeLiveVideoCodec : StreamingVideoCodec
+    public class YouTubeLiveVideoCodec : StreamingVideoCodec
     {
-        public YouTubeLiveVideoCodec() : base("YouTube Live", "Stream to YouTube Live (Not Tested)") { }
+        public YouTubeLiveVideoCodec() : base("YouTube Live", "Stream to YouTube Live") { }
 
         protected override string GetLink(FFmpegSettings Settings)
         {

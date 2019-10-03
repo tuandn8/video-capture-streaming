@@ -67,7 +67,7 @@ namespace Captura
 
                 buffer.Unlock();
 
-                var sample = MediaFactory.CreateVideoSampleFromSurface(null);
+                using var sample = MediaFactory.CreateVideoSampleFromSurface(null);
                 sample.AddBuffer(buffer);
 
                 sample.SampleTime = _audioWritten * TenPower7 / _audioInBytesPerSecond;
