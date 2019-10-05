@@ -10,7 +10,7 @@ namespace Captura.FFmpeg
 
         protected override string GetLink(FFmpegSettings Settings)
         {
-            return $"{Settings.SteamLiveUrl}/{Settings.MixerLiveKey}";
+            return $"{Settings.MixerLiveUrl}/{Settings.MixerLiveKey}";
         }
 
     }

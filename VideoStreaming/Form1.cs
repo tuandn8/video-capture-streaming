@@ -62,7 +62,7 @@ namespace VideoStreaming
 
             //_recordStreamViewModel.Settings.FFmpeg.YouTubeLiveKey = streamKey.Result;
             _recordStreamViewModel.SetStreamService("youtube");
-            _recordStreamViewModel.Settings.FFmpeg.YouTubeLiveKey = "t8p8-f29d-tumt-2cq1";
+            _recordStreamViewModel.Settings.FFmpeg.YouTubeLiveKey = txtYoutubeKey.Text;
             _recordStreamViewModel.StartRecording();
         }
 
@@ -74,9 +74,8 @@ namespace VideoStreaming
         private void btnStartSteam_Click(object sender, EventArgs e)
         {
             _recordStreamViewModel.SetStreamService("steam");
-            _recordStreamViewModel.Settings.FFmpeg.SteamLiveUrl =
-                "rtmp://ingest-02-hkg1.broadcast.steamcontent.com/app";
-            _recordStreamViewModel.Settings.FFmpeg.SteamLiveKey = "steam_294584987_366a0a71f6fe1953";
+            _recordStreamViewModel.Settings.FFmpeg.SteamLiveUrl = txtSteamUrl.Text;
+            _recordStreamViewModel.Settings.FFmpeg.SteamLiveKey = txtSteamKey.Text;
             _recordStreamViewModel.StartRecording();
         }
 
@@ -87,20 +86,21 @@ namespace VideoStreaming
 
         private void btnStartMixer_Click(object sender, EventArgs e)
         {
-
+            _recordStreamViewModel.SetStreamService("mixer");
+            _recordStreamViewModel.Settings.FFmpeg.MixerLiveUrl = txtMixerUrl.Text;
+            _recordStreamViewModel.Settings.FFmpeg.MixerLiveKey = txtMixerKey.Text;
+            _recordStreamViewModel.StartRecording();
         }
 
         private void btnStopMixer_Click(object sender, EventArgs e)
         {
-
+            _recordStreamViewModel.PauseRecording();
         }
 
         private void btnStartWowza_Click(object sender, EventArgs e)
         {
             _recordStreamViewModel.SetStreamService("wowza");
-            _recordStreamViewModel.Settings.FFmpeg.WowzaLiveUrl = "rtmp://192.168.1.16:1935";
-            _recordStreamViewModel.Settings.FFmpeg.WowzaApp = "live";
-            _recordStreamViewModel.Settings.FFmpeg.WowzaStream = "myStream";
+            _recordStreamViewModel.Settings.FFmpeg.WowzaLiveUrl = txtWowzaUrl.Text;
             
             _recordStreamViewModel.StartRecording();
         }

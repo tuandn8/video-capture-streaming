@@ -52,7 +52,7 @@
 
         public int FrameRate
         {
-            get => Get(10);
+            get => Get(30);
             set => Set(value);
         }
 

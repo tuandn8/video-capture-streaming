@@ -98,13 +98,16 @@ namespace Captura.ViewModels
             }
             else // Pause
             {
-                _recorder.Stop();
-                _timerModel.Pause();
+                if (_recorder != null)
+                {
+                    _recorder.Stop();
+                    _timerModel.Pause();
 
-                RecorderState = RecorderState.Paused;
+                    RecorderState = RecorderState.Paused;
 
-                _pauseNotification = new TextNotification(Loc.Paused, OnPauseExecute);
-                _systemTray.ShowNotification(_pauseNotification);
+                    _pauseNotification = new TextNotification(Loc.Paused, OnPauseExecute);
+                    _systemTray.ShowNotification(_pauseNotification);
+                }
             }
         }
 

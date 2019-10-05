@@ -51,8 +51,8 @@ namespace Captura.Models
                 .AddArg("pix_fmt", nv12 ? "nv12" : "rgb32")
                 .SetVideoSize(w, h);
 
-            var output = argsBuilder.AddOutputFile(Args.FileName)
-                .SetFrameRate(Args.FrameRate);
+            var output = argsBuilder.AddOutputFile(Args.FileName);
+                //.SetFrameRate(Args.FrameRate);
 
             Args.VideoCodec.Apply(settings, Args, output);
             

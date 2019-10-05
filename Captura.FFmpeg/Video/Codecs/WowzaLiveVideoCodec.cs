@@ -16,12 +16,13 @@ namespace Captura.FFmpeg
             // quality: 51 (lowest) to 0 (highest)
             var crf = (51 * (100 - WriterArgs.VideoQuality)) / 99;
 
-            OutputArgs.AddArg("crf", crf)
+            OutputArgs.AddArg("maxrate", "5000k")
+                .AddArg("bitrate", "5000k")
+                .AddArg("bufsize", "10M")
                 .AddArg("pix_fmt", Settings.X264.PixelFormat)
-                .AddArg("preset", Settings.X264.Preset);
-
-            OutputArgs.AddArg("g", WriterArgs.FrameRate * 2)
-                .AddArg("r", WriterArgs.FrameRate)
+                //.AddArg("preset", Settings.X264.Preset)
+                .AddArg("g", WriterArgs.FrameRate * 2)
+                //.AddArg("r", WriterArgs.FrameRate)
                 .AddArg("f", "flv");
 
             var link = GetLink(Settings);
@@ -32,7 +33,7 @@ namespace Captura.FFmpeg
 
         protected override string GetLink(FFmpegSettings Settings)
         {
-            return $"{Settings.WowzaLiveUrl}/{Settings.WowzaApp}/{Settings.WowzaStream}";
+            return Settings.WowzaLiveUrl;
         }
     }
 }

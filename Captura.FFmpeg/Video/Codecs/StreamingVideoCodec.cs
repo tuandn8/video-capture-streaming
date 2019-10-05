@@ -24,6 +24,7 @@ namespace Captura.FFmpeg
 
         protected abstract string GetLink(FFmpegSettings Settings);
 
-        public override FFmpegAudioArgsProvider AudioArgsProvider => FFmpegAudioItem.Mp3;
+        //public override FFmpegAudioArgsProvider AudioArgsProvider => FFmpegAudioItem.Mp3;
+        public override FFmpegAudioArgsProvider AudioArgsProvider => FFmpegAudioItem.Aac;
     }
 }

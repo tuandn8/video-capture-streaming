@@ -62,6 +62,12 @@ namespace Captura
             set => Set(value);
         }
 
+        public string MixerLiveUrl
+        {
+            get => Get("");
+            set => Set(value);
+        }
+
         public string MixerLiveKey
         {
             get => Get("");
@@ -73,19 +79,7 @@ namespace Captura
             get => Get("");
             set => Set(value);
         }
-
-        public string WowzaApp
-        {
-            get => Get("");
-            set => Set(value);
-        }
-
-        public string WowzaStream
-        {
-            get => Get("");
-            set => Set(value);
-        }
-
+                
         public ObservableCollection<FFmpegCodecSettings> CustomCodecs { get; } = new ObservableCollection<FFmpegCodecSettings>();
 
         public string CustomStreamingUrl
